@@ -167,10 +167,61 @@ public App(){
         tabla.setVisible(true);
         frameTabla.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         tabla.setEnabled(true);
-        JButton BotonContinuar = new JButton("Continuar");
-        frameTabla.add(BotonContinuar,BorderLayout.SOUTH);
+        JButton BotonCalcular = new JButton("Calcular");
+        frameTabla.add(BotonCalcular,BorderLayout.SOUTH);
+        BotonCalcular.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MostrarResultadoCriterios();
+            }
+        });
+    }
+
+    private void MostrarResultadoCriterios() {
+        JFrame frameResultado = new JFrame();
+        frameResultado.setTitle("Matriz De Beneficios");
+        frameResultado.setSize(1100,500);
+        frameResultado.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        JTextArea textC1 = new JTextArea("Resultado para el criterio 1:" + calcularCriterio1());
+        JTextArea textC2 = new JTextArea("Resultado para el criterio 2:" + calcularCriterio2());
+        JTextArea textC3 = new JTextArea("Resultado para el criterio 3:" + calcularCriterio3());
+        JTextArea textC4 = new JTextArea("Resultado para el criterio 4:" + calcularCriterio4());
+        JTextArea textC5 = new JTextArea("Resultado para el criterio 5:" + calcularCriterio5());
+        JTextArea textC6 = new JTextArea("Resultado para el criterio 6:" + calcularCriterio6());
+        frameResultado.add(textC1);
+        frameResultado.add(textC2);
+        frameResultado.add(textC3);
+        frameResultado.add(textC4);
+        frameResultado.add(textC5);
+        frameResultado.add(textC6);
 
     }
+
+    private int calcularCriterio1() {
+        return 0;
+    }
+
+    private int calcularCriterio2() {
+        return 0;
+    }
+
+    private int calcularCriterio3() {
+        return 0;
+    }
+
+    private int calcularCriterio4() {
+        return 0;
+    }
+
+    private int calcularCriterio5() {
+        return 0;
+    }
+
+    private int calcularCriterio6() {
+        return 0;
+    }
+
+
     public static void main(String[] args) {
         new App();
     }
