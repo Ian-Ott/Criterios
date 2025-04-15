@@ -7,8 +7,8 @@ public class Criterio {
         nroFilaResult = 0;
         nombreFilaResult = " ";
     }
-    public int calcularCriterio(){
-        return 0;
+    public Double calcularCriterio(){
+        return 0.0;
     }
 
     public int getNroFilaResult() {

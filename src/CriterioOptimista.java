@@ -6,11 +6,11 @@ public class CriterioOptimista extends Criterio{
     }
 
     @Override
-    public int calcularCriterio() {
+    public Double calcularCriterio() {
         //primero obtenemos cada fila
-        ArrayList<Integer> listaMaximo = new ArrayList<>();
-        ArrayList<Integer> listaFilaTemp;
-        int valorMaxActual = -100000000;
+        ArrayList<Double> listaMaximo = new ArrayList<>();
+        ArrayList<Double> listaFilaTemp;
+        Double valorMaxActual = -100000000.0;
         for (int i = 0; i < matrizDatos.getFilaTamanio(); i++) {
             listaFilaTemp = matrizDatos.obtenerFila(i);
             //luego buscamos el valor maximo de cada fila
@@ -20,7 +20,7 @@ public class CriterioOptimista extends Criterio{
                 }
             }
             listaMaximo.add(valorMaxActual);
-            valorMaxActual = -100000000;
+            valorMaxActual = -100000000.0;
         }
         //por ultimo, se busca el maximo de la lista generada
         for (int i = 0; i < listaMaximo.size(); i++) {

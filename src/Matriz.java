@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Matriz {
     private String[] NombreColumnas;
     private String[] NombreFilas;
-    private ArrayList<Integer> lista = new ArrayList<>();
+    private ArrayList<Double> lista = new ArrayList<>();
     private int CantColumnas;
 
     public Matriz(int CantColumnas,int CantFilas) {
@@ -12,7 +12,7 @@ public class Matriz {
         this.CantColumnas = CantColumnas;
     }
 
-    public void setLista(ArrayList<Integer> lista){
+    public void setLista(ArrayList<Double> lista){
         this.lista = lista;
     }
 
@@ -39,8 +39,8 @@ public class Matriz {
         NombreFilas = nombreFilas;
     }
 
-    public ArrayList<Integer> obtenerFila(int numFila){
-        ArrayList<Integer> listaTemp = new ArrayList<>();
+    public ArrayList<Double> obtenerFila(int numFila){
+        ArrayList<Double> listaTemp = new ArrayList<>();
         int posFila = numFila * CantColumnas;
         for (int i = 0; i < CantColumnas; i++) {
             listaTemp.add(i,this.getValueAt(posFila,i));
@@ -52,7 +52,7 @@ public class Matriz {
         return NombreFilas[numFila];
     }
 
-    public Integer getValueAt(int rowIndex, int columnIndex) {
+    public Double getValueAt(int rowIndex, int columnIndex) {
         int posicion = (rowIndex * CantColumnas) + columnIndex;
         if (lista.get(posicion) != null){
             return lista.get(posicion);

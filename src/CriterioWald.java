@@ -6,11 +6,11 @@ public class CriterioWald extends Criterio{
     }
 
     @Override
-    public int calcularCriterio() {
+    public Double calcularCriterio() {
         //primero obtenemos cada fila
-        ArrayList<Integer> listaMinimo = new ArrayList<>();
-        ArrayList<Integer> listaFilaTemp ;
-        int valorMinActual = 100000000;
+        ArrayList<Double> listaMinimo = new ArrayList<>();
+        ArrayList<Double> listaFilaTemp ;
+        Double valorMinActual = 100000000.0;
         for (int i = 0; i < matrizDatos.getFilaTamanio(); i++) {
             listaFilaTemp = matrizDatos.obtenerFila(i);
             //luego buscamos el valor minimo de cada fila
@@ -20,10 +20,10 @@ public class CriterioWald extends Criterio{
                 }
             }
             listaMinimo.add(valorMinActual);
-            valorMinActual = 100000000;
+            valorMinActual = 100000000.0;
         }
         //por ultimo, se busca el maximo de la lista generada
-        int valorMaxActual = -100000000;
+        Double valorMaxActual = -100000000.0;
         for (int i = 0; i < listaMinimo.size(); i++) {
             if (listaMinimo.get(i) > valorMaxActual){
                 valorMaxActual = listaMinimo.get(i);
