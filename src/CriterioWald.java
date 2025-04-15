@@ -9,7 +9,7 @@ public class CriterioWald extends Criterio{
     public int calcularCriterio() {
         //primero obtenemos cada fila
         ArrayList<Integer> listaMinimo = new ArrayList<>();
-        ArrayList<Integer> listaFilaTemp = new ArrayList<>();
+        ArrayList<Integer> listaFilaTemp ;
         int valorMinActual = 100000000;
         for (int i = 0; i < matrizDatos.getFilaTamanio(); i++) {
             listaFilaTemp = matrizDatos.obtenerFila(i);
