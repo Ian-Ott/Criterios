@@ -5,6 +5,7 @@ public class Matriz {
     private String[] NombreFilas;
     private ArrayList<Double> lista = new ArrayList<>();
     private int CantColumnas;
+    private ArrayList<Double> listaProb = new ArrayList<>();
 
     public Matriz(int CantColumnas,int CantFilas) {
         NombreColumnas = new String[CantColumnas];
@@ -62,5 +63,16 @@ public class Matriz {
             return lista.get(posicion);
         }
         return null;
+    }
+
+    public void setListaProb(ArrayList<Double> listaProb) {
+        this.listaProb = listaProb;
+    }
+
+    public ArrayList<Double> getListaProb() {
+        return listaProb;
+    }
+    public Double getValorListaProb(int numCol) {
+        return listaProb.get(numCol);
     }
 }
