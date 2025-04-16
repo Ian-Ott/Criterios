@@ -49,6 +49,15 @@ public class Matriz {
         return listaTemp;
     }
 
+    public ArrayList<Double> obtenerColumna(int numCol){
+        ArrayList<Double> listaTemp = new ArrayList<>();
+        int posCol = numCol * this.getFilaTamanio();
+        for (int i = 0; i < this.getFilaTamanio(); i++) {
+            listaTemp.add(i,this.getValueAt(i,posCol));
+        }
+        return listaTemp;
+    }
+
     public String getNombreFila(int numFila){
         return NombreFilas[numFila];
     }
