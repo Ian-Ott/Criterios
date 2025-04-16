@@ -52,6 +52,10 @@ public class Matriz {
         return NombreFilas[numFila];
     }
 
+    public void setValueAt(int rowIndex, int columnIndex, Double valor){
+        int posicion = (rowIndex * CantColumnas) + columnIndex;
+        lista.set(posicion,valor);
+    }
     public Double getValueAt(int rowIndex, int columnIndex) {
         int posicion = (rowIndex * CantColumnas) + columnIndex;
         if (lista.get(posicion) != null){
