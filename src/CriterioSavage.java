@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class CriterioSavage extends Criterio{
-    Matriz matrizArrepentimiento;
+    private Matriz matrizArrepentimiento;
     public CriterioSavage(Matriz matrizDatos) {
         super(matrizDatos);
     }

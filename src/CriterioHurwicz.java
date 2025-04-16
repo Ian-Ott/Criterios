@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class CriterioHurwicz extends Criterio{
-    double coeficienteOptimismo;
+    private double coeficienteOptimismo;
     public CriterioHurwicz(Matriz matrizDatos) {
         super(matrizDatos);
         coeficienteOptimismo = 0.7;

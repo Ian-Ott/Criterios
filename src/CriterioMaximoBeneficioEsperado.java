@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class CriterioMaximoBeneficioEsperado extends Criterio{
-    Double BEIP;
-    Double VEIP;
+    private Double BEIP;
+    private Double VEIP;
     public CriterioMaximoBeneficioEsperado(Matriz matrizDatos) {
         super(matrizDatos);
     }

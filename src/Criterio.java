@@ -1,7 +1,7 @@
 public class Criterio {
-    Matriz matrizDatos;
-    int nroFilaResult;
-    String nombreFilaResult;
+    protected Matriz matrizDatos;
+    protected int nroFilaResult;
+    protected String nombreFilaResult;
     public Criterio(Matriz matrizDatos){
         this.matrizDatos = matrizDatos;
         nroFilaResult = 0;

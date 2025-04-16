@@ -42,18 +42,16 @@ public class Matriz {
 
     public ArrayList<Double> obtenerFila(int numFila){
         ArrayList<Double> listaTemp = new ArrayList<>();
-        int posFila = numFila * CantColumnas;
         for (int i = 0; i < CantColumnas; i++) {
-            listaTemp.add(i,this.getValueAt(posFila,i));
+            listaTemp.add(i,this.getValueAt(numFila,i));
         }
         return listaTemp;
     }
 
     public ArrayList<Double> obtenerColumna(int numCol){
         ArrayList<Double> listaTemp = new ArrayList<>();
-        int posCol = numCol * this.getFilaTamanio();
         for (int i = 0; i < this.getFilaTamanio(); i++) {
-            listaTemp.add(i,this.getValueAt(i,posCol));
+            listaTemp.add(i,this.getValueAt(i,numCol));
         }
         return listaTemp;
     }
@@ -64,7 +62,7 @@ public class Matriz {
 
     public void setValueAt(int rowIndex, int columnIndex, Double valor){
         int posicion = (rowIndex * CantColumnas) + columnIndex;
-        lista.set(posicion,valor);
+        lista.add(posicion,valor);
     }
     public Double getValueAt(int rowIndex, int columnIndex) {
         int posicion = (rowIndex * CantColumnas) + columnIndex;
