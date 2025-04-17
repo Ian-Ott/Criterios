@@ -63,4 +63,12 @@ public class CriterioMaximoBeneficioEsperado extends Criterio{
         }
         return beip;
     }
+
+    public Double getBEIP() {
+        return BEIP;
+    }
+
+    public Double getVEIP() {
+        return VEIP;
+    }
 }

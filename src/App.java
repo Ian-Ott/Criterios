@@ -27,6 +27,8 @@ public class App {
     private DefaultTableCellRenderer renderCentralTabla;
     private JButton BotonCalcular;
     private JFrame frameResultado;
+    private JTextField textOptimismo = new JTextField("0.7");
+    private Double optimismo;
 
 
 
@@ -220,6 +222,9 @@ private void inciarApp(){
         frameTabla.add(scrollTabla, BorderLayout.CENTER);
         tabla.setVisible(true);
         tabla.setEnabled(true);
+        JTextArea textP = new JTextArea("Coeficiente de Optimismo = ");
+        textP.add(textOptimismo);
+        frameTabla.add(textP, BorderLayout.EAST);
         BotonCalcular = new JButton("Calcular");
         frameTabla.add(BotonCalcular,BorderLayout.SOUTH);
         BotonCalcular.addActionListener(new ActionListener() {
@@ -228,6 +233,13 @@ private void inciarApp(){
                 BotonCalcular.setEnabled(false);
                 if(tabla.isEditing()){
                     tabla.getCellEditor().stopCellEditing();
+                }
+                try{
+                    optimismo = Double.valueOf(textOptimismo.getText());
+                } catch (NumberFormatException ex) {
+                    //dialog error
+                    mostrarMatrizBeneficios();
+                    frameTabla.dispose();
                 }
                 String vActual;
                 for (int i = 0; i < tabla.getRowCount(); i++) {
@@ -271,7 +283,7 @@ private void inciarApp(){
         Double valorW = criterioW.calcularCriterio();
         CriterioOptimista criterioO = new CriterioOptimista(listaTabla);
         Double valorO = criterioO.calcularCriterio();
-        CriterioHurwicz criterioH = new CriterioHurwicz(listaTabla);
+        CriterioHurwicz criterioH = new CriterioHurwicz(listaTabla, optimismo);
         Double valorH = criterioH.calcularCriterio();
         CriterioSavage criterioS = new CriterioSavage(listaTabla);
         Double valorS = criterioS.calcularCriterio();
@@ -280,38 +292,21 @@ private void inciarApp(){
         JTextArea textC1 = new JTextArea("Resultado para el criterio Wald: " + criterioW.getNombreFilaResult() + " " + valorW);
         JTextArea textC2 = new JTextArea("Resultado para el criterio Optimista: " + criterioO.getNombreFilaResult() + " " + valorO);
         JTextArea textC3 = new JTextArea("Resultado para el criterio Hurwicz: " + criterioH.getNombreFilaResult() + " " + valorH);
-        JTextArea textC4 = new JTextArea("Resultado para el criterio 4: " + criterioS.getNombreFilaResult() + " " + valorS);
-        JTextArea textC5 = new JTextArea("Resultado para el criterio 5: " + criterioMBE.getNombreFilaResult() + " " + valorMBE);
-        JTextArea textC6 = new JTextArea("Resultado para el criterio 6:" + calcularCriterio6());
+        JTextArea textC4 = new JTextArea("Resultado para el criterio : " + criterioS.getNombreFilaResult() + " " + valorS);
+        JTextArea textC5 = new JTextArea("Resultado para el criterio : " + criterioMBE.getNombreFilaResult() + " " + valorMBE);
+        JTextArea textC6 = new JTextArea("Resultado para el BEIP:" + criterioMBE.getBEIP());
+        JTextArea textC7 = new JTextArea("Resultado para el VEIP:" + criterioMBE.getVEIP());
         frameResultado.add(textC1);
         frameResultado.add(textC2);
         frameResultado.add(textC3);
         frameResultado.add(textC4);
         frameResultado.add(textC5);
         frameResultado.add(textC6);
-
+        frameResultado.add(textC7);
     }
 
 
-    private int calcularCriterio2() {
-        return 0;
-    }
 
-    private int calcularCriterio3() {
-        return 0;
-    }
-
-    private int calcularCriterio4() {
-        return 0;
-    }
-
-    private int calcularCriterio5() {
-        return 0;
-    }
-
-    private int calcularCriterio6() {
-        return 0;
-    }
 
 
     public static void main(String[] args) {
