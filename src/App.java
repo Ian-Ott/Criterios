@@ -29,6 +29,7 @@ public class App {
     private JFrame frameResultado;
     private JTextField textOptimismo = new JTextField("0.7");
     private Double optimismo;
+    private boolean error = false;
 
 
 
@@ -178,18 +179,41 @@ private void inciarApp(){
                 }
                 ArrayList<Double> listaTemp = new ArrayList<>();
                 String actual;
+                Double sumaP = 0.0;
                 for (int i = 0; i < CantColumnas; i++) {
                     actual = (String) tabla.getModel().getValueAt(0,i);
-                    listaTemp.add(Double.valueOf(actual));
-                    //controlar que sea string el valor?
+                    if (actual != null) {
+                        try {
+                            listaTemp.add(Double.valueOf(actual));
+                            sumaP = sumaP + listaTemp.get(i);
+                        } catch (NumberFormatException ex) {
+                            error = true;
+                            mostrarError("El valor ingresado no es valido.");
+                        }
+                    }else {
+                        error = true;
+                        mostrarError("Ningun campo de probabilidad puede estar vacio.");
+                    }
                 }
-                listaTabla.setListaProb(listaTemp); //comprobar que la suma de probabilidades sea igual a 1
-                listaTabla.setNombreColumnas(NombresColumna);
-                mostrarMatrizBeneficios();
-                frameTabla.dispose();
+                if (!error) {
+                    if (sumaP != 1) {
+                        mostrarError("La suma de las probabilidades no son iguales a 1.");
+                    } else {
+                        listaTabla.setListaProb(listaTemp); //comprobar que la suma de probabilidades sea igual a 1
+                        listaTabla.setNombreColumnas(NombresColumna);
+                        mostrarMatrizBeneficios();
+                        frameTabla.dispose();
+                    }
+                }else {
+                    error = false;
+                }
             }
         });
 
+    }
+
+    private void mostrarError(String textError) {
+        JOptionPane.showMessageDialog(null,textError,"ERROR",JOptionPane.ERROR_MESSAGE);//agregar icono?
     }
 
     private void mostrarMatrizBeneficios(){
@@ -252,31 +276,52 @@ private void inciarApp(){
                 if(tabla.isEditing()){
                     tabla.getCellEditor().stopCellEditing();
                 }
-                try{
-                    optimismo = Double.valueOf(textOptimismo.getText());
-                } catch (NumberFormatException ex) {
-                    //dialog error
-                    mostrarMatrizBeneficios();
-                    frameTabla.dispose();
-                }
-                String vActual;
-                for (int i = 0; i < tabla.getRowCount(); i++) {
-                    for (int j = 0; j < tabla.getColumnCount(); j++) {
-                        vActual = (String) tabla.getValueAt(i,j);
-                        Double vNumActual = 0.0;
-                        try {
-                            vNumActual = Double.valueOf(vActual);
-                        } catch (NumberFormatException ex) {
-                            //dialog error
-                            mostrarMatrizBeneficios();
-                            frameTabla.dispose();
+                if (textOptimismo.getText() != null) {
+                    try {
+                        optimismo = Double.valueOf(textOptimismo.getText());
+                        if (optimismo > 1.0 || optimismo < 0.0) {
+                            error = true;
+                            mostrarError("El Coeficiente de Optimismo debe ser entre 0 y 1.");
                         }
-                        listaTabla.setValueAt(i,j, vNumActual); //falta verificacion de tipo
+                    } catch (NumberFormatException ex) {
+                        error = true;
+                        mostrarError("El Coeficiente de Optimismo no es valido.");
                     }
+                } else{
+                    error = true;
+                    mostrarError("El Coeficiente de Optimismo no puede estar vacio.");
                 }
-                MostrarResultadoCriterios();
+                if (!error) {
+                    String vActual;
+                    for (int i = 0; i < tabla.getRowCount(); i++) {
+                        for (int j = 0; j < tabla.getColumnCount(); j++) {
+                            vActual = (String) tabla.getValueAt(i, j);
+                            Double vNumActual = 0.0;
+                            if (vActual != null) {
+                                try {
+                                    vNumActual = Double.valueOf(vActual);
+                                } catch (NumberFormatException ex) {
+                                    error = true;
+                                    mostrarError("El valor ingresado en la matriz de beneficios no es valido");
+                                }
+                                listaTabla.setValueAt(i, j, vNumActual); //falta verificacion de tipo
+                            } else {
+                                error = true;
+                                mostrarError("La matriz de beneficios no puede tener celdas vacias.");
+                            }
+                        }
+                    }
+                    if (!error) {
+                        MostrarResultadoCriterios();
+                    }else {error = false;
+                        BotonCalcular.setEnabled(true);
+                    }
+                }else {error = false;
+                    BotonCalcular.setEnabled(true);
+                }
             }
         });
+        frameTabla.add(BotonCalcular,BorderLayout.SOUTH);
     }
 
     private int encabezadoSizeMax(String[] nombreFila, FontMetrics tamanioFuente) {
@@ -322,8 +367,8 @@ private void inciarApp(){
         JTextArea textC1 = new JTextArea("Resultado para el criterio Wald: " + criterioW.getNombreFilaResult() + " " + valorW);
         JTextArea textC2 = new JTextArea("Resultado para el criterio Optimista: " + criterioO.getNombreFilaResult() + " " + valorO);
         JTextArea textC3 = new JTextArea("Resultado para el criterio Hurwicz: " + criterioH.getNombreFilaResult() + " " + valorH);
-        JTextArea textC4 = new JTextArea("Resultado para el criterio : " + criterioS.getNombreFilaResult() + " " + valorS);
-        JTextArea textC5 = new JTextArea("Resultado para el criterio : " + criterioMBE.getNombreFilaResult() + " " + valorMBE);
+        JTextArea textC4 = new JTextArea("Resultado para el criterio Savage: " + criterioS.getNombreFilaResult() + " " + valorS);
+        JTextArea textC5 = new JTextArea("Resultado para el criterio de Riesgo: " + criterioMBE.getNombreFilaResult() + " " + valorMBE);
         JTextArea textC6 = new JTextArea("Resultado para el BEIP:" + criterioMBE.getBEIP());
         JTextArea textC7 = new JTextArea("Resultado para el VEIP:" + criterioMBE.getVEIP());
         frameResultado.add(textC1);
@@ -334,10 +379,6 @@ private void inciarApp(){
         frameResultado.add(textC6);
         frameResultado.add(textC7);
     }
-
-
-
-
 
     public static void main(String[] args) {
         new App();
