@@ -94,7 +94,11 @@ private void inciarApp(){
                     tabla.getCellEditor().stopCellEditing();
                 }
                 for (int i = 0; i < CantFilas; i++) {
-                    NombresFila[i] = (String) tabla.getModel().getValueAt(i,0);
+                    if (tabla.getModel().getValueAt(i, 0) == null){
+                        NombresFila[i] = "Accion " + (i + 1);
+                    }else {
+                        NombresFila[i] = (String) tabla.getModel().getValueAt(i, 0);
+                    }
                     //controlar que sea string el valor?
                 }
                 listaTabla.setNombreFilas(NombresFila);
@@ -130,7 +134,11 @@ private void inciarApp(){
                     tabla.getCellEditor().stopCellEditing();
                 }
                 for (int i = 0; i < CantColumnas; i++) {
-                    NombresColumna[i] = (String) tabla.getModel().getValueAt(i,0);
+                    if (tabla.getModel().getValueAt(i, 0) == null){
+                        NombresColumna[i] = "Estado " + (i + 1);
+                    }else {
+                        NombresColumna[i] = (String) tabla.getModel().getValueAt(i, 0);
+                    }
                     //controlar que sea string el valor?
                 }
                 listaTabla.setNombreColumnas(NombresColumna);
@@ -147,6 +155,7 @@ private void inciarApp(){
         frameTabla.setLayout(new BorderLayout());
         JTextArea text = new JTextArea("Inserte las probabilidades de cada columna.");
         frameTabla.add(text,BorderLayout.NORTH);
+        text.setEditable(false);
         Object[] encabezado = listaTabla.getNombreColumnas();
         //se suma una fila para los encabezados
         JTable tabla = new JTable(new DefaultTableModel(encabezado,1));
@@ -193,26 +202,33 @@ private void inciarApp(){
         frameTabla.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frameTabla.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosed(WindowEvent e) {
+            public void windowClosing(WindowEvent e) {
                 super.windowClosed(e);
-                frameResultado.dispose();
+                if (frameResultado != null) {
+                    frameResultado.dispose();
+                }
                 inciarApp();
             }
         });
         //se suma una fila para los encabezados
         JTable tabla = new JTable(new DefaultTableModel(listaTabla.getNombreColumnas() , CantFilas));
         tabla.getTableHeader().setBackground(new Color(147,147,150));
+        tabla.getTableHeader().setForeground(new Color(0,0,0));
         tabla.getTableHeader().setOpaque(false);
         tabla.getTableHeader().setReorderingAllowed(false);
         JScrollPane scrollTabla = new JScrollPane(tabla);
-        JTable encabezadoFila = new JTable(new DefaultTableModel(CantFilas, 1));
-        encabezadoFila.getColumnModel().getColumn(0).setCellRenderer(renderCentralTabla);
-        encabezadoFila.setEnabled(false);
-        encabezadoFila.setBackground(new Color(147,147,150));
-        for (int i = 0; i < listaTabla.getNombreFilas().length; i++) {
-            encabezadoFila.setValueAt(listaTabla.getNombreFilas()[i],i,0);
-        }
-        scrollTabla.setRowHeaderView(encabezadoFila);
+        JList<String> encabezadoF = new JList<>(listaTabla.getNombreFilas());
+        //encabezadoF.setEnabled(false);
+        encabezadoF.setBackground(new Color(147,147,150));
+        encabezadoF.setForeground(new Color(0,0,0));
+
+
+        FontMetrics tamanioFuente = encabezadoF.getFontMetrics(encabezadoF.getFont());
+        //se establece el ancho de el encabezado de fila segun el ancho del string mas largo
+        encabezadoF.setFixedCellWidth(encabezadoSizeMax(listaTabla.getNombreFilas(),tamanioFuente) + 10);
+        scrollTabla.setRowHeaderView(encabezadoF);
+
+        scrollTabla.setSize(1000,500);
         JScrollBar scrollLateral = new JScrollBar(JScrollBar.HORIZONTAL);
         scrollTabla.setHorizontalScrollBar(scrollLateral);
         scrollTabla.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -223,10 +239,12 @@ private void inciarApp(){
         tabla.setVisible(true);
         tabla.setEnabled(true);
         JTextArea textP = new JTextArea("Coeficiente de Optimismo = ");
-        textP.add(textOptimismo);
-        frameTabla.add(textP, BorderLayout.EAST);
+        textP.setEditable(false);
+        JPanel panelOpt = new JPanel(new FlowLayout());
+        panelOpt.add(textP);
+        panelOpt.add(textOptimismo);
+        frameTabla.add(panelOpt, BorderLayout.NORTH);
         BotonCalcular = new JButton("Calcular");
-        frameTabla.add(BotonCalcular,BorderLayout.SOUTH);
         BotonCalcular.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -259,6 +277,18 @@ private void inciarApp(){
                 MostrarResultadoCriterios();
             }
         });
+    }
+
+    private int encabezadoSizeMax(String[] nombreFila, FontMetrics tamanioFuente) {
+        int maxLenght = 0;
+        int actual;
+        for (int i = 0; i < nombreFila.length; i++) {
+            actual = tamanioFuente.stringWidth(nombreFila[i]);
+            if (nombreFila[i].length() > maxLenght){
+                maxLenght = actual;
+            }
+        }
+        return maxLenght;
     }
 
     private void MostrarResultadoCriterios() {
