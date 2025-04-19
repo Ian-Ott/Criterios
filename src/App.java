@@ -181,18 +181,20 @@ private void inciarApp(){
                 String actual;
                 Double sumaP = 0.0;
                 for (int i = 0; i < CantColumnas; i++) {
-                    actual = (String) tabla.getModel().getValueAt(0,i);
-                    if (actual != null) {
-                        try {
-                            listaTemp.add(Double.valueOf(actual));
-                            sumaP = sumaP + listaTemp.get(i);
-                        } catch (NumberFormatException ex) {
+                    if (!error) {
+                        actual = (String) tabla.getModel().getValueAt(0, i);
+                        if (actual != null) {
+                            try {
+                                listaTemp.add(Double.valueOf(actual));
+                                sumaP = sumaP + listaTemp.get(i);
+                            } catch (NumberFormatException ex) {
+                                error = true;
+                                mostrarError("El valor ingresado no es valido.");
+                            }
+                        } else {
                             error = true;
-                            mostrarError("El valor ingresado no es valido.");
+                            mostrarError("Ningun campo de probabilidad puede estar vacio.");
                         }
-                    }else {
-                        error = true;
-                        mostrarError("Ningun campo de probabilidad puede estar vacio.");
                     }
                 }
                 if (!error) {
@@ -295,19 +297,21 @@ private void inciarApp(){
                     String vActual;
                     for (int i = 0; i < tabla.getRowCount(); i++) {
                         for (int j = 0; j < tabla.getColumnCount(); j++) {
-                            vActual = (String) tabla.getValueAt(i, j);
-                            Double vNumActual = 0.0;
-                            if (vActual != null) {
-                                try {
-                                    vNumActual = Double.valueOf(vActual);
-                                } catch (NumberFormatException ex) {
+                            if(!error) {
+                                vActual = (String) tabla.getValueAt(i, j);
+                                Double vNumActual = 0.0;
+                                if (vActual != null) {
+                                    try {
+                                        vNumActual = Double.valueOf(vActual);
+                                    } catch (NumberFormatException ex) {
+                                        error = true;
+                                        mostrarError("El valor ingresado en la matriz de beneficios no es valido");
+                                    }
+                                    listaTabla.setValueAt(i, j, vNumActual); //falta verificacion de tipo
+                                } else {
                                     error = true;
-                                    mostrarError("El valor ingresado en la matriz de beneficios no es valido");
+                                    mostrarError("La matriz de beneficios no puede tener celdas vacias.");
                                 }
-                                listaTabla.setValueAt(i, j, vNumActual); //falta verificacion de tipo
-                            } else {
-                                error = true;
-                                mostrarError("La matriz de beneficios no puede tener celdas vacias.");
                             }
                         }
                     }
