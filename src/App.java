@@ -295,6 +295,7 @@ private void inciarApp(){
                 }
                 if (!error) {
                     String vActual;
+                    listaTabla.setLista(new ArrayList<>());
                     for (int i = 0; i < tabla.getRowCount(); i++) {
                         for (int j = 0; j < tabla.getColumnCount(); j++) {
                             if(!error) {
@@ -343,9 +344,10 @@ private void inciarApp(){
     private void MostrarResultadoCriterios() {
         frameResultado = new JFrame();
         frameResultado.setTitle("Resultado segun los criterios");
-        frameResultado.setLayout(new FlowLayout());
-        frameResultado.setSize(1100,500);
         frameResultado.setVisible(true);
+        
+        frameResultado.getContentPane().setLayout(new BoxLayout(frameResultado.getContentPane(),BoxLayout.Y_AXIS));
+        frameResultado.setSize(1100,500);
         frameResultado.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         frameResultado.setTitle("Matriz De Beneficios");
@@ -368,13 +370,21 @@ private void inciarApp(){
         Double valorS = criterioS.calcularCriterio();
         CriterioMaximoBeneficioEsperado criterioMBE = new CriterioMaximoBeneficioEsperado(listaTabla);
         Double valorMBE = criterioMBE.calcularCriterio();
-        JTextArea textC1 = new JTextArea("Resultado para el criterio Wald: " + criterioW.getNombreFilaResult() + " " + valorW);
-        JTextArea textC2 = new JTextArea("Resultado para el criterio Optimista: " + criterioO.getNombreFilaResult() + " " + valorO);
-        JTextArea textC3 = new JTextArea("Resultado para el criterio Hurwicz: " + criterioH.getNombreFilaResult() + " " + valorH);
-        JTextArea textC4 = new JTextArea("Resultado para el criterio Savage: " + criterioS.getNombreFilaResult() + " " + valorS);
-        JTextArea textC5 = new JTextArea("Resultado para el criterio de Riesgo: " + criterioMBE.getNombreFilaResult() + " " + valorMBE);
-        JTextArea textC6 = new JTextArea("Resultado para el BEIP:" + criterioMBE.getBEIP());
-        JTextArea textC7 = new JTextArea("Resultado para el VEIP:" + criterioMBE.getVEIP());
+        JTextArea textC1 = new JTextArea("Resultado para el criterio Wald: " + criterioW.getNombreFilaResult() + " " + String.format("%.4s",valorW));
+        JTextArea textC2 = new JTextArea("Resultado para el criterio Optimista: " + criterioO.getNombreFilaResult() + " " + String.format("%.4s",valorO));
+        JTextArea textC3 = new JTextArea("Resultado para el criterio Hurwicz: " + criterioH.getNombreFilaResult() + " " + String.format("%.4s",valorH));
+        JTextArea textC4 = new JTextArea("Resultado para el criterio Savage: " + criterioS.getNombreFilaResult() + " " + String.format("%.4s",valorS));
+        JTextArea textC5 = new JTextArea("Resultado para el criterio de Riesgo: " + criterioMBE.getNombreFilaResult() + " " + String.format("%.4s",valorMBE));
+        JTextArea textC6 = new JTextArea("Resultado para el BEIP:" + String.format("%.4s",criterioMBE.getBEIP()));
+        JTextArea textC7 = new JTextArea("Resultado para el VEIP:" + String.format("%.4s",criterioMBE.getVEIP()));
+        textC1.setEditable(false);
+        textC2.setEditable(false);
+        textC3.setEditable(false);
+        textC4.setEditable(false);
+        textC5.setEditable(false);
+        textC6.setEditable(false);
+        textC7.setEditable(false);
+
         frameResultado.add(textC1);
         frameResultado.add(textC2);
         frameResultado.add(textC3);
@@ -382,6 +392,21 @@ private void inciarApp(){
         frameResultado.add(textC5);
         frameResultado.add(textC6);
         frameResultado.add(textC7);
+        textC1.setAlignmentX(Container.CENTER_ALIGNMENT);
+        textC1.setMaximumSize(new Dimension(400, 60));
+        textC2.setAlignmentX(Container.CENTER_ALIGNMENT);
+        textC2.setMaximumSize(new Dimension(400, 60));
+        textC3.setAlignmentX(Container.CENTER_ALIGNMENT);
+        textC3.setMaximumSize(new Dimension(400, 60));
+        textC4.setAlignmentX(Container.CENTER_ALIGNMENT);
+        textC4.setMaximumSize(new Dimension(400, 60));
+        textC5.setAlignmentX(Container.CENTER_ALIGNMENT);
+        textC5.setMaximumSize(new Dimension(400, 60));
+        textC6.setAlignmentX(Container.CENTER_ALIGNMENT);
+        textC6.setMaximumSize(new Dimension(400, 60));
+        textC7.setAlignmentX(Container.CENTER_ALIGNMENT);
+        textC7.setMaximumSize(new Dimension(400, 60));
+
     }
 
     public static void main(String[] args) {
