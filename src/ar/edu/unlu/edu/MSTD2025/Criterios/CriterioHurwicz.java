@@ -1,6 +1,10 @@
+package ar.edu.unlu.edu.MSTD2025.Criterios;
+
+import ar.edu.unlu.edu.MSTD2025.Modelo.Matriz;
+
 import java.util.ArrayList;
 
-public class CriterioHurwicz extends Criterio{
+public class CriterioHurwicz extends Criterio {
     private double coeficienteOptimismo;
     public CriterioHurwicz(Matriz matrizDatos, Double optimismo) {
         super(matrizDatos);

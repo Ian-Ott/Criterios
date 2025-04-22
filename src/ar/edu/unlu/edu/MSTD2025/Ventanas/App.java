@@ -1,4 +1,10 @@
+package ar.edu.unlu.edu.MSTD2025.Ventanas;
+
+import ar.edu.unlu.edu.MSTD2025.Criterios.*;
+import ar.edu.unlu.edu.MSTD2025.Modelo.Matriz;
+
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -69,24 +75,62 @@ private void inciarApp(){
         JFrame frameTabla = new JFrame();
         frameTabla.setTitle("Lista de Acciones");
         frameTabla.setLayout(new BorderLayout());
+        frameTabla.setBackground(Color.WHITE);
          NombresFila = new String[CantFilas];
+         JPanel panelA = new JPanel(new FlowLayout(FlowLayout.CENTER));
+         panelA.setBackground(Color.WHITE);
+         JTextArea txtA = new JTextArea("ACCIONES");
+         txtA.setBackground(new Color(229,225,57));
+         txtA.setDisabledTextColor(Color.BLACK);
+         txtA.setFont(new Font("Calibri",Font.BOLD,24));
+         txtA.setBorder(new LineBorder(Color.BLACK));
+         txtA.setEditable(false);
+         txtA.setEnabled(false);
+         panelA.add(txtA);
+         frameTabla.add(panelA,BorderLayout.NORTH);
          Object[] encabezado = {"Nombres de las acciones"};
         //se suma una fila para los encabezados
         JTable tabla = new JTable(new DefaultTableModel(encabezado,CantFilas));
+
+        //configuraciones visuales
         tabla.getTableHeader().setReorderingAllowed(false);
+        tabla.getTableHeader().setFont(new Font("Calibri", Font.BOLD,16));
+        tabla.getTableHeader().setForeground(Color.BLACK);
+        tabla.getTableHeader().setBackground(Color.WHITE);
+        tabla.getTableHeader().setBorder(new LineBorder(Color.BLACK));
         /*for (int i = 0; i < CantFilas; i++) {
             tabla.setValueAt(" ",i,0);
         }*/
+        JPanel panelT = new JPanel(new FlowLayout (FlowLayout.CENTER));
+        panelT.setBackground(Color.WHITE);
         JScrollPane scrollTabla = new JScrollPane(tabla);
+        scrollTabla.setBackground(Color.WHITE);
+        scrollTabla.setBorder(new LineBorder(Color.BLACK));
+        scrollTabla.getVerticalScrollBar().setBackground(Color.WHITE);
+
+
+        scrollTabla.getViewport().setFont(new Font("Calibri",Font.BOLD,12));
+        scrollTabla.getViewport().setBackground(Color.WHITE);
+        scrollTabla.getViewport().setForeground(Color.BLACK);//parece que no cambia
+        scrollTabla.setViewportBorder(new LineBorder(Color.BLACK));
+
+        scrollTabla.setBackground(Color.WHITE);
         frameTabla.setSize(1100,500);
         tabla.setSize(1100,500);
-        frameTabla.add(scrollTabla, BorderLayout.CENTER);
+        panelT.add(scrollTabla);
+        frameTabla.add(panelT, BorderLayout.CENTER);
         frameTabla.setVisible(true);
         tabla.setVisible(true);
         frameTabla.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         tabla.setEnabled(true);
+        JPanel panelS = new JPanel(new FlowLayout (FlowLayout.CENTER));
+        panelS.setBackground(Color.WHITE);
         JButton BotonContinuar = new JButton("Continuar");
-        frameTabla.add(BotonContinuar, BorderLayout.SOUTH);
+        BotonContinuar.setBackground(new Color(229,225,57));
+        BotonContinuar.setFont(new Font("Calibri",Font.BOLD,24));
+        BotonContinuar.setBorder(new LineBorder(Color.BLACK));
+        panelS.add(BotonContinuar);
+        frameTabla.add(panelS, BorderLayout.SOUTH);
 
         BotonContinuar.addActionListener(new ActionListener() {
             @Override
@@ -221,7 +265,7 @@ private void inciarApp(){
     private void mostrarMatrizBeneficios(){
         //listaTabla.setLista(listaTablaTemp);
         JFrame frameTabla = new JFrame();
-        frameTabla.setTitle("Matriz De Beneficios");
+        frameTabla.setTitle("ar.edu.unlu.edu.MSTD2025.Modelo.Matriz De Beneficios");
         frameTabla.setLayout(new BorderLayout());
         frameTabla.setSize(1100,500);
         frameTabla.setVisible(true);
@@ -239,14 +283,14 @@ private void inciarApp(){
         //se suma una fila para los encabezados
         JTable tabla = new JTable(new DefaultTableModel(listaTabla.getNombreColumnas() , CantFilas));
         tabla.getTableHeader().setBackground(new Color(147,147,150));
-        tabla.getTableHeader().setForeground(new Color(0,0,0));
+        tabla.getTableHeader().setForeground(Color.BLACK);
         tabla.getTableHeader().setOpaque(false);
         tabla.getTableHeader().setReorderingAllowed(false);
         JScrollPane scrollTabla = new JScrollPane(tabla);
         JList<String> encabezadoF = new JList<>(listaTabla.getNombreFilas());
         //encabezadoF.setEnabled(false);
         encabezadoF.setBackground(new Color(147,147,150));
-        encabezadoF.setForeground(new Color(0,0,0));
+        encabezadoF.setForeground(Color.BLACK);
 
 
         FontMetrics tamanioFuente = encabezadoF.getFontMetrics(encabezadoF.getFont());
@@ -350,7 +394,7 @@ private void inciarApp(){
         frameResultado.setSize(1100,500);
         frameResultado.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        frameResultado.setTitle("Matriz De Beneficios");
+        frameResultado.setTitle("ar.edu.unlu.edu.MSTD2025.Modelo.Matriz De Beneficios");
         frameResultado.setSize(1100,500);
         frameResultado.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frameResultado.addWindowListener(new WindowAdapter() {

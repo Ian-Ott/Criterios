@@ -1,6 +1,10 @@
+package ar.edu.unlu.edu.MSTD2025.Criterios;
+
+import ar.edu.unlu.edu.MSTD2025.Modelo.Matriz;
+
 import java.util.ArrayList;
 
-public class CriterioOptimista extends Criterio{
+public class CriterioOptimista extends Criterio {
     public CriterioOptimista(Matriz matrizDatos) {
         super(matrizDatos);
     }

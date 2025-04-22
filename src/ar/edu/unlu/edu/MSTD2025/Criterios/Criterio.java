@@ -1,3 +1,7 @@
+package ar.edu.unlu.edu.MSTD2025.Criterios;
+
+import ar.edu.unlu.edu.MSTD2025.Modelo.Matriz;
+
 public class Criterio {
     protected Matriz matrizDatos;
     protected int nroFilaResult;

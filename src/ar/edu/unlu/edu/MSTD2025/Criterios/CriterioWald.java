@@ -1,6 +1,10 @@
+package ar.edu.unlu.edu.MSTD2025.Criterios;
+
+import ar.edu.unlu.edu.MSTD2025.Modelo.Matriz;
+
 import java.util.ArrayList;
 
-public class CriterioWald extends Criterio{
+public class CriterioWald extends Criterio {
     public CriterioWald(Matriz matrizDatos) {
         super(matrizDatos);
     }

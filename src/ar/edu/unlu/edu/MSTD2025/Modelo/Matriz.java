@@ -1,3 +1,5 @@
+package ar.edu.unlu.edu.MSTD2025.Modelo;
+
 import java.util.ArrayList;
 
 public class Matriz {

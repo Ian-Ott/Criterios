@@ -1,6 +1,10 @@
+package ar.edu.unlu.edu.MSTD2025.Criterios;
+
+import ar.edu.unlu.edu.MSTD2025.Modelo.Matriz;
+
 import java.util.ArrayList;
 
-public class CriterioSavage extends Criterio{
+public class CriterioSavage extends Criterio {
     private Matriz matrizArrepentimiento;
     public CriterioSavage(Matriz matrizDatos) {
         super(matrizDatos);
