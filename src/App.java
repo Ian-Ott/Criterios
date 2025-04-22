@@ -11,10 +11,10 @@ import java.util.Vector;
 public class App {
     private JFrame frame;
     private JPanel panelPrincipal;
-    private JTextArea ingreseLaCantidadDeTextArea;
+    private JTextArea laCantidadDeEstadosTextArea;
     private JButton SiguienteButton;
     private JComboBox<Integer> ColComboBox;
-    private JTextArea ingreseLaCantidadDeTextArea1;
+    private JTextArea laCantidadDeAccionesTextArea;
     private JComboBox<Integer> FilaComboBox;
     private Matriz listaTabla;
     private ArrayList<String> listaTablaTemp;
