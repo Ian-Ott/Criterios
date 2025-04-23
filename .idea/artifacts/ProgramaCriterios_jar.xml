@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ProgramaCriterios:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProgramaCriterios_jar</output-path>
+    <root id="archive" name="ProgramaCriterios.jar">
+      <element id="module-output" name="ProgramaCriterios" />
+    </root>
+  </artifact>
+</component>
