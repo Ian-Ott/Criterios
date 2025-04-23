@@ -1,5 +1,5 @@
 package ar.edu.unlu.edu.MSTD2025.Criterios;
-import ar.edu.unlu.edu.MSTD2025.Modelo.Matriz;
+import ar.edu.unlu.edu.MSTD2025.Matriz.Matriz;
 
 import java.util.ArrayList;
 

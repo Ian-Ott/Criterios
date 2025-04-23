@@ -1,7 +1,7 @@
 package ar.edu.unlu.edu.MSTD2025.Ventanas;
 
 import ar.edu.unlu.edu.MSTD2025.Criterios.*;
-import ar.edu.unlu.edu.MSTD2025.Modelo.Matriz;
+import ar.edu.unlu.edu.MSTD2025.Matriz.Matriz;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
 public class VentanaResultadoCriterio {
@@ -41,6 +40,7 @@ public class VentanaResultadoCriterio {
         });
         JPanel panelM = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelM.setBackground(Color.WHITE);
+
         JTextArea txtM = new JTextArea("MATRIZ DE BENEFICIOS");
         txtM.setBackground(new Color(229, 63, 57));
         txtM.setDisabledTextColor(Color.BLACK);
@@ -48,9 +48,10 @@ public class VentanaResultadoCriterio {
         txtM.setBorder(new LineBorder(Color.BLACK));
         txtM.setEditable(false);
         txtM.setEnabled(false);
+
         JPanel panelR = new JPanel(new FlowLayout());
         panelR.setBackground(Color.WHITE);
-        panelM.setBackground(Color.WHITE);
+
         JTextArea txtR = new JTextArea("Resultados");
         txtR.setBackground(new Color(255, 255, 255));
         txtR.setDisabledTextColor(Color.BLACK);
@@ -58,6 +59,7 @@ public class VentanaResultadoCriterio {
         txtR.setBorder(new LineBorder(Color.BLACK));
         txtR.setEditable(false);
         txtR.setEnabled(false);
+
         panelM.add(txtM);
         panelR.add(txtR);
         frameResultado.add(panelM, BorderLayout.NORTH);
@@ -66,12 +68,16 @@ public class VentanaResultadoCriterio {
 
         CriterioWald criterioW = new CriterioWald(listaTabla);
         Double valorW = criterioW.calcularCriterio();
+
         CriterioOptimista criterioO = new CriterioOptimista(listaTabla);
         Double valorO = criterioO.calcularCriterio();
+
         CriterioHurwicz criterioH = new CriterioHurwicz(listaTabla, optimismo);
         Double valorH = criterioH.calcularCriterio();
+
         CriterioSavage criterioS = new CriterioSavage(listaTabla);
         Double valorS = criterioS.calcularCriterio();
+
         CriterioMaximoBeneficioEsperado criterioMBE = new CriterioMaximoBeneficioEsperado(listaTabla);
         Double valorMBE = criterioMBE.calcularCriterio();
 
@@ -81,13 +87,13 @@ public class VentanaResultadoCriterio {
         //crea con el formato de punto para los decimales
         DecimalFormat df = (DecimalFormat) DecimalFormat.getNumberInstance(Locale.US);
         df.applyPattern("#0.0000");
-
         df.setGroupingUsed(false);
         df.setMaximumFractionDigits(4);
         df.setMinimumFractionDigits(4);
 
         JPanel panel1 = new JPanel(new FlowLayout());
         panel1.setBackground(Color.WHITE);
+
         JTextArea textC1 = new JTextArea("Resultado para el criterio Wald ");
         textC1.setBackground(new Color(220,87,83));
         textC1.setBorder(new LineBorder(Color.BLACK));
@@ -95,6 +101,7 @@ public class VentanaResultadoCriterio {
         textC1.setDisabledTextColor(Color.BLACK);
         textC1.setEditable(false);
         textC1.setEnabled(false);
+
         JTextArea textCO1 = new JTextArea(criterioW.getNombreFilaResult());
         textCO1.setBackground(new Color(255, 255, 255));
         textCO1.setBorder(new LineBorder(Color.BLACK));
@@ -102,6 +109,7 @@ public class VentanaResultadoCriterio {
         textCO1.setDisabledTextColor(Color.BLACK);
         textCO1.setEditable(false);
         textCO1.setEnabled(false);
+
         JTextArea textCOR1 = new JTextArea(df.format(valorW));
         textCOR1.setBackground(new Color(255, 255, 255));
         textCOR1.setBorder(new LineBorder(Color.BLACK));
@@ -109,6 +117,7 @@ public class VentanaResultadoCriterio {
         textCOR1.setDisabledTextColor(Color.BLACK);
         textCOR1.setEditable(false);
         textCOR1.setEnabled(false);
+
         panel1.add(textC1);
         panel1.add(textCO1);
         panel1.add(textCOR1);
@@ -119,6 +128,7 @@ public class VentanaResultadoCriterio {
 
         JPanel panel2 = new JPanel(new FlowLayout());
         panel2.setBackground(Color.WHITE);
+
         JTextArea textC2 = new JTextArea("Resultado para el criterio Optimista ");
         textC2.setBackground(new Color(220,87,83));
         textC2.setBorder(new LineBorder(Color.BLACK));
@@ -126,6 +136,7 @@ public class VentanaResultadoCriterio {
         textC2.setDisabledTextColor(Color.BLACK);
         textC2.setEditable(false);
         textC2.setEnabled(false);
+
         JTextArea textCO2 = new JTextArea(criterioO.getNombreFilaResult());
         textCO2.setBackground(new Color(255, 255, 255));
         textCO2.setBorder(new LineBorder(Color.BLACK));
@@ -133,6 +144,7 @@ public class VentanaResultadoCriterio {
         textCO2.setDisabledTextColor(Color.BLACK);
         textCO2.setEditable(false);
         textCO2.setEnabled(false);
+
         JTextArea textCOR2 = new JTextArea(df.format(valorO));
         textCOR2.setBackground(new Color(255, 255, 255));
         textCOR2.setBorder(new LineBorder(Color.BLACK));
@@ -140,6 +152,7 @@ public class VentanaResultadoCriterio {
         textCOR2.setDisabledTextColor(Color.BLACK);
         textCOR2.setEditable(false);
         textCOR2.setEnabled(false);
+
         panel2.add(textC2);
         panel2.add(textCO2);
         panel2.add(textCOR2);
@@ -147,8 +160,10 @@ public class VentanaResultadoCriterio {
 
         JPanel panelC3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelC3.setBackground(Color.WHITE);
+
         JPanel panel3 = new JPanel(new FlowLayout());
         panel3.setBackground(Color.WHITE);
+
         JTextArea textC3 = new JTextArea("Resultado para el criterio Hurwicz ");
         textC3.setBackground(new Color(220,87,83));
         textC3.setBorder(new LineBorder(Color.BLACK));
@@ -156,6 +171,7 @@ public class VentanaResultadoCriterio {
         textC3.setDisabledTextColor(Color.BLACK);
         textC3.setEditable(false);
         textC3.setEnabled(false);
+
         JTextArea textCO3 = new JTextArea(criterioH.getNombreFilaResult());
         textCO3.setBackground(new Color(255, 255, 255));
         textCO3.setBorder(new LineBorder(Color.BLACK));
@@ -163,6 +179,7 @@ public class VentanaResultadoCriterio {
         textCO3.setDisabledTextColor(Color.BLACK);
         textCO3.setEditable(false);
         textCO3.setEnabled(false);
+
         JTextArea textCOR3 = new JTextArea(df.format(valorH));
         textCOR3.setBackground(new Color(255, 255, 255));
         textCOR3.setBorder(new LineBorder(Color.BLACK));
@@ -170,6 +187,7 @@ public class VentanaResultadoCriterio {
         textCOR3.setDisabledTextColor(Color.BLACK);
         textCOR3.setEditable(false);
         textCOR3.setEnabled(false);
+
         panel3.add(textC3);
         panel3.add(textCO3);
         panel3.add(textCOR3);
@@ -180,6 +198,7 @@ public class VentanaResultadoCriterio {
 
         JPanel panel4 = new JPanel(new FlowLayout());
         panel4.setBackground(Color.WHITE);
+
         JTextArea textC4 = new JTextArea("Resultado para el criterio Savage ");
         textC4.setBackground(new Color(220,87,83));
         textC4.setBorder(new LineBorder(Color.BLACK));
@@ -187,6 +206,7 @@ public class VentanaResultadoCriterio {
         textC4.setDisabledTextColor(Color.BLACK);
         textC4.setEditable(false);
         textC4.setEnabled(false);
+
         JTextArea textCO4 = new JTextArea(criterioS.getNombreFilaResult());
         textCO4.setBackground(new Color(255, 255, 255));
         textCO4.setBorder(new LineBorder(Color.BLACK));
@@ -194,6 +214,7 @@ public class VentanaResultadoCriterio {
         textCO4.setDisabledTextColor(Color.BLACK);
         textCO4.setEditable(false);
         textCO4.setEnabled(false);
+
         JTextArea textCOR4 = new JTextArea(df.format(valorS));
         textCOR4.setBackground(new Color(255, 255, 255));
         textCOR4.setBorder(new LineBorder(Color.BLACK));
@@ -201,6 +222,7 @@ public class VentanaResultadoCriterio {
         textCOR4.setDisabledTextColor(Color.BLACK);
         textCOR4.setEditable(false);
         textCOR4.setEnabled(false);
+
         panel4.add(textC4);
         panel4.add(textCO4);
         panel4.add(textCOR4);
@@ -208,8 +230,10 @@ public class VentanaResultadoCriterio {
 
         JPanel panelC5 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelC5.setBackground(Color.WHITE);
+
         JPanel panel5 = new JPanel(new FlowLayout());
         panel5.setBackground(Color.WHITE);
+
         JTextArea textC5 = new JTextArea("Resultado para el criterio de Riesgo ");
         textC5.setBackground(new Color(220,87,83));
         textC5.setBorder(new LineBorder(Color.BLACK));
@@ -217,6 +241,7 @@ public class VentanaResultadoCriterio {
         textC5.setDisabledTextColor(Color.BLACK);
         textC5.setEditable(false);
         textC5.setEnabled(false);
+
         JTextArea textCO5 = new JTextArea(criterioMBE.getNombreFilaResult());
         textCO5.setBackground(new Color(255, 255, 255));
         textCO5.setBorder(new LineBorder(Color.BLACK));
@@ -224,6 +249,7 @@ public class VentanaResultadoCriterio {
         textCO5.setDisabledTextColor(Color.BLACK);
         textCO5.setEditable(false);
         textCO5.setEnabled(false);
+
         JTextArea textCOR5 = new JTextArea(df.format(valorMBE));
         textCOR5.setBackground(new Color(255, 255, 255));
         textCOR5.setBorder(new LineBorder(Color.BLACK));
@@ -231,6 +257,7 @@ public class VentanaResultadoCriterio {
         textCOR5.setDisabledTextColor(Color.BLACK);
         textCOR5.setEditable(false);
         textCOR5.setEnabled(false);
+
         panel5.add(textC5);
         panel5.add(textCO5);
         panel5.add(textCOR5);
@@ -238,8 +265,10 @@ public class VentanaResultadoCriterio {
 
         JPanel panelC6 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelC6.setBackground(Color.WHITE);
+
         JPanel panel6 = new JPanel(new FlowLayout());
         panel6.setBackground(Color.WHITE);
+
         JTextArea textB6 = new JTextArea("Resultado para el BEIP ");
         textB6.setBackground(new Color(220,87,83));
         textB6.setBorder(new LineBorder(Color.BLACK));
@@ -247,6 +276,7 @@ public class VentanaResultadoCriterio {
         textB6.setDisabledTextColor(Color.BLACK);
         textB6.setEditable(false);
         textB6.setEnabled(false);
+
         JTextArea textBR6 = new JTextArea(df.format(criterioMBE.getBEIP()));
         textBR6.setBackground(new Color(255, 255, 255));
         textBR6.setBorder(new LineBorder(Color.BLACK));
@@ -254,14 +284,17 @@ public class VentanaResultadoCriterio {
         textBR6.setDisabledTextColor(Color.BLACK);
         textBR6.setEditable(false);
         textBR6.setEnabled(false);
+
         panel6.add(textB6);
         panel6.add(textBR6);
         panelC6.add(panel6);
 
         JPanel panelC7 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelC7.setBackground(Color.WHITE);
+
         JPanel panel7 = new JPanel(new FlowLayout());
         panel7.setBackground(Color.WHITE);
+
         JTextArea textV7 = new JTextArea("Resultado para el VEIP ");
         textV7.setBackground(new Color(220,87,83));
         textV7.setBorder(new LineBorder(Color.BLACK));
@@ -269,6 +302,7 @@ public class VentanaResultadoCriterio {
         textV7.setDisabledTextColor(Color.BLACK);
         textV7.setEditable(false);
         textV7.setEnabled(false);
+
         JTextArea textVR7 = new JTextArea(df.format(criterioMBE.getVEIP()));
         textVR7.setBackground(new Color(255, 255, 255));
         textVR7.setBorder(new LineBorder(Color.BLACK));
@@ -276,6 +310,7 @@ public class VentanaResultadoCriterio {
         textVR7.setDisabledTextColor(Color.BLACK);
         textVR7.setEditable(false);
         textVR7.setEnabled(false);
+
         panel7.add(textV7);
         panel7.add(textVR7);
         panelC7.add(panel7);

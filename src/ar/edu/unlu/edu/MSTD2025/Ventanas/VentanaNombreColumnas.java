@@ -1,6 +1,6 @@
 package ar.edu.unlu.edu.MSTD2025.Ventanas;
 
-import ar.edu.unlu.edu.MSTD2025.Modelo.Matriz;
+import ar.edu.unlu.edu.MSTD2025.Matriz.Matriz;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -28,6 +28,9 @@ public class VentanaNombreColumnas {
         frameTabla.setTitle("Lista de Estados de Naturaleza");
         frameTabla.setLayout(new BorderLayout());
         frameTabla.setBackground(Color.WHITE);
+        frameTabla.setSize(1100, 500);
+        frameTabla.setVisible(true);
+        frameTabla.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frameTabla.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -37,8 +40,10 @@ public class VentanaNombreColumnas {
         });
 
         this.NombresCol = new String[this.CantColumnas];
+
         JPanel panelE = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelE.setBackground(Color.WHITE);
+
         JTextArea txtE = new JTextArea("ESTADOS");
         txtE.setBackground(new Color(53, 206, 36));
         txtE.setDisabledTextColor(Color.BLACK);
@@ -48,9 +53,13 @@ public class VentanaNombreColumnas {
         txtE.setEnabled(false);
         panelE.add(txtE);
         frameTabla.add(panelE, BorderLayout.NORTH);
+
         Object[] encabezado = {"Nombres de los estados de la naturaleza"};
         //se suma una fila para los encabezados
         JTable tabla = new JTable(new DefaultTableModel(encabezado, this.CantColumnas));
+        tabla.setPreferredScrollableViewportSize(new Dimension(500, 300));
+        tabla.setVisible(true);
+        tabla.setEnabled(true);
 
         //configuraciones visuales
         tabla.getTableHeader().setReorderingAllowed(false);
@@ -58,17 +67,15 @@ public class VentanaNombreColumnas {
         tabla.getTableHeader().setForeground(Color.BLACK);
         tabla.getTableHeader().setBackground(Color.WHITE);
         tabla.getTableHeader().setBorder(new LineBorder(Color.BLACK));
-        /*for (int i = 0; i < CantFilas; i++) {
-            tabla.setValueAt(" ",i,0);
-        }*/
+
         JPanel panelT = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelT.setBackground(Color.WHITE);
+
         JScrollPane scrollTabla = new JScrollPane(tabla);
         scrollTabla.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollTabla.setBackground(Color.WHITE);
         scrollTabla.setBorder(new LineBorder(Color.BLACK));
         scrollTabla.getVerticalScrollBar().setBackground(Color.WHITE);
-
 
         scrollTabla.getViewport().setFont(new Font("Calibri", Font.BOLD, 12));
         scrollTabla.getViewport().setBackground(Color.WHITE);
@@ -76,16 +83,13 @@ public class VentanaNombreColumnas {
         scrollTabla.setViewportBorder(new LineBorder(Color.BLACK));
 
 
-        frameTabla.setSize(1100, 500);
-        tabla.setPreferredScrollableViewportSize(new Dimension(500, 300));
         panelT.add(scrollTabla);
         frameTabla.add(panelT, BorderLayout.CENTER);
-        frameTabla.setVisible(true);
-        tabla.setVisible(true);
-        frameTabla.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        tabla.setEnabled(true);
+
+
         JPanel panelS = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelS.setBackground(Color.WHITE);
+
         JButton BotonContinuar = new JButton("Continuar");
         BotonContinuar.setBackground(new Color(53, 206, 36));
         BotonContinuar.setFont(new Font("Calibri", Font.BOLD, 24));
@@ -105,7 +109,6 @@ public class VentanaNombreColumnas {
                     } else {
                         NombresCol[i] = (String) tabla.getModel().getValueAt(i, 0);
                     }
-                    //controlar que sea string el valor?
                 }
                 listaTabla.setNombreColumnas(NombresCol);
                 new VentanaProbColumn(listaTabla);

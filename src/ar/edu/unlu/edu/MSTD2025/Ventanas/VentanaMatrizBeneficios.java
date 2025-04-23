@@ -1,6 +1,6 @@
 package ar.edu.unlu.edu.MSTD2025.Ventanas;
 
-import ar.edu.unlu.edu.MSTD2025.Modelo.Matriz;
+import ar.edu.unlu.edu.MSTD2025.Matriz.Matriz;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -42,8 +42,10 @@ public class VentanaMatrizBeneficios {
                 new App();
             }
         });
+
         JPanel panelM = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelM.setBackground(Color.WHITE);
+
         JTextArea txtM = new JTextArea("MATRIZ DE BENEFICIOS");
         txtM.setBackground(new Color(229, 63, 57));
         txtM.setDisabledTextColor(Color.BLACK);
@@ -52,6 +54,7 @@ public class VentanaMatrizBeneficios {
         txtM.setEditable(false);
         txtM.setEnabled(false);
         panelM.add(txtM);
+
         //se suma una fila para los encabezados
         JTable tabla = new JTable(new DefaultTableModel(listaTabla.getNombreColumnas() ,listaTabla.getFilaTamanio()));
         tabla.setBackground(new Color(255, 255, 255));
@@ -60,11 +63,12 @@ public class VentanaMatrizBeneficios {
         tabla.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 16));
         tabla.getTableHeader().setOpaque(false);
         tabla.getTableHeader().setReorderingAllowed(false);
+        tabla.setPreferredScrollableViewportSize(new Dimension(300, 200));
+        tabla.setVisible(true);
+        tabla.setEnabled(true);
         //tabla.getTableHeader().setResizingAllowed(false);
-        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabla.getTableHeader().setBorder(new LineBorder(Color.BLACK));
-        //tabla.setPreferredScrollableViewportSize(new Dimension(800, 400));
-
 
         JScrollPane scrollTabla = new JScrollPane(tabla);
         scrollTabla.setBackground(Color.WHITE);
@@ -91,6 +95,7 @@ public class VentanaMatrizBeneficios {
         encabezadoF.setFixedCellWidth(encabezadoSizeMax(listaTabla.getNombreFilas(),tamanioFuente) + 10);
         scrollTabla.setRowHeaderView(encabezadoF);
 
+        //el tamaño del encabezado de la columna se define segun el tamaño del string de cada nombre
         FontMetrics tamanioFC = tabla.getTableHeader().getFontMetrics(tabla.getTableHeader().getFont());
         setEncabezadoSizeMax(tabla,listaTabla.getNombreColumnas(),tamanioFC);
 
@@ -99,13 +104,8 @@ public class VentanaMatrizBeneficios {
         scrollTabla.setHorizontalScrollBar(scrollLateral);
         scrollTabla.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollTabla.getHorizontalScrollBar().setBackground(Color.WHITE);
-
-        //tabla.setSize(1100,500);
-        tabla.setPreferredScrollableViewportSize(new Dimension(300, 200));
-        //tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         frameTabla.add(scrollTabla, BorderLayout.CENTER);
-        tabla.setVisible(true);
-        tabla.setEnabled(true);
+
         JTextArea textP = new JTextArea("Coeficiente de Optimismo = ");
         textP.setBorder(new LineBorder(Color.BLACK));
         textP.setFont(new Font("Calibri", Font.BOLD, 16));
@@ -122,20 +122,23 @@ public class VentanaMatrizBeneficios {
         textOptimismo.setBackground(Color.WHITE);
         textOptimismo.setBorder(new LineBorder(Color.BLACK));
         panelOpt.add(textOptimismo);
-        JPanel panelN = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+        JPanel panelN = new JPanel(new BorderLayout());
         panelN.setBackground(Color.WHITE);
-        panelN.add(panelM);
-        panelN.add(panelOpt);
+        panelN.add(panelM,BorderLayout.CENTER);
+        panelN.add(panelOpt,BorderLayout.SOUTH);
         frameTabla.add(panelN, BorderLayout.NORTH);
 
         JPanel panelS = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelS.setBackground(Color.WHITE);
+
         BotonCalcular = new JButton("Calcular");
         BotonCalcular.setBackground(new Color(220, 87, 83));
         BotonCalcular.setFont(new Font("Calibri", Font.BOLD, 24));
         BotonCalcular.setBorder(new LineBorder(Color.BLACK));
         panelS.add(BotonCalcular);
         frameTabla.add(panelS, BorderLayout.SOUTH);
+
         BotonCalcular.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

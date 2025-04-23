@@ -1,6 +1,6 @@
 package ar.edu.unlu.edu.MSTD2025.Ventanas;
 
-import ar.edu.unlu.edu.MSTD2025.Modelo.Matriz;
+import ar.edu.unlu.edu.MSTD2025.Matriz.Matriz;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -25,6 +25,9 @@ public class VentanaNombreFilas {
         frameTabla.setTitle("Lista de Acciones");
         frameTabla.setLayout(new BorderLayout());
         frameTabla.setBackground(Color.WHITE);
+        frameTabla.setSize(1100, 500);
+        frameTabla.setVisible(true);
+        frameTabla.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frameTabla.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -34,8 +37,10 @@ public class VentanaNombreFilas {
         });
 
         this.NombresFila = new String[this.CantFilas];
+
         JPanel panelA = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelA.setBackground(Color.WHITE);
+
         JTextArea txtA = new JTextArea("ACCIONES");
         txtA.setBackground(new Color(255, 251, 55));
         txtA.setDisabledTextColor(Color.BLACK);
@@ -45,9 +50,13 @@ public class VentanaNombreFilas {
         txtA.setEnabled(false);
         panelA.add(txtA);
         frameTabla.add(panelA, BorderLayout.NORTH);
+
         Object[] encabezado = {"Nombres de las acciones"};
         //se suma una fila para los encabezados
         JTable tabla = new JTable(new DefaultTableModel(encabezado, this.CantFilas));
+        tabla.setSize(1100, 400);
+        tabla.setVisible(true);
+        tabla.setEnabled(true);
 
         //configuraciones visuales
         tabla.getTableHeader().setReorderingAllowed(false);
@@ -59,6 +68,7 @@ public class VentanaNombreFilas {
 
         JPanel panelT = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelT.setBackground(Color.WHITE);
+
         JScrollPane scrollTabla = new JScrollPane(tabla);
         scrollTabla.setBackground(Color.WHITE);
         scrollTabla.setBorder(new LineBorder(Color.BLACK));
@@ -70,17 +80,12 @@ public class VentanaNombreFilas {
         scrollTabla.getViewport().setBackground(Color.WHITE);
         scrollTabla.getViewport().setForeground(Color.BLACK);//parece que no cambia
         scrollTabla.setViewportBorder(new LineBorder(Color.BLACK));
-
-        frameTabla.setSize(1100, 500);
-        tabla.setSize(1100, 400);
         panelT.add(scrollTabla);
         frameTabla.add(panelT, BorderLayout.CENTER);
-        frameTabla.setVisible(true);
-        tabla.setVisible(true);
-        frameTabla.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        tabla.setEnabled(true);
+
         JPanel panelS = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelS.setBackground(Color.WHITE);
+
         JButton BotonContinuar = new JButton("Continuar");
         BotonContinuar.setBackground(new Color(255, 251, 55));
         BotonContinuar.setFont(new Font("Calibri", Font.BOLD, 24));

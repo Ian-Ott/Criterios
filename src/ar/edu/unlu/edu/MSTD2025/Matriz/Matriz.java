@@ -1,4 +1,4 @@
-package ar.edu.unlu.edu.MSTD2025.Modelo;
+package ar.edu.unlu.edu.MSTD2025.Matriz;
 
 import java.util.ArrayList;
 
