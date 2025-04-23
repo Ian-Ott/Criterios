@@ -7,12 +7,14 @@ public class Matriz {
     private String[] NombreFilas;
     private ArrayList<Double> lista = new ArrayList<>();
     private int CantColumnas;
+    private int CantFilas;
     private ArrayList<Double> listaProb = new ArrayList<>();
 
     public Matriz(int CantColumnas,int CantFilas) {
         NombreColumnas = new String[CantColumnas];
         NombreFilas = new String[CantFilas];
         this.CantColumnas = CantColumnas;
+        this.CantFilas = CantFilas;
     }
 
     public void setLista(ArrayList<Double> lista){
@@ -20,7 +22,7 @@ public class Matriz {
     }
 
     public int getFilaTamanio() {
-        return lista.size()/ NombreColumnas.length;
+        return  NombreFilas.length;
     }
 
 
@@ -52,7 +54,7 @@ public class Matriz {
 
     public ArrayList<Double> obtenerColumna(int numCol){
         ArrayList<Double> listaTemp = new ArrayList<>();
-        for (int i = 0; i < this.getFilaTamanio(); i++) {
+        for (int i = 0; i < CantFilas; i++) {
             listaTemp.add(i,this.getValueAt(i,numCol));
         }
         return listaTemp;
