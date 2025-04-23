@@ -65,7 +65,6 @@ private void inciarApp(){
             CantFilas = (int) FilaComboBox.getSelectedItem();
             CantColumnas = (int) ColComboBox.getSelectedItem();
             listaTabla = new Matriz(CantColumnas, CantFilas);
-            //IniciarVentanaNombresFilas();
             new VentanaNombreFilas(CantFilas,listaTabla);
             frame.dispose();
         }

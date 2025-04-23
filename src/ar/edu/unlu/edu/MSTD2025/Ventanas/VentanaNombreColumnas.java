@@ -8,6 +8,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class VentanaNombreColumnas {
     private int CantColumnas;
@@ -26,6 +28,14 @@ public class VentanaNombreColumnas {
         frameTabla.setTitle("Lista de Estados de Naturaleza");
         frameTabla.setLayout(new BorderLayout());
         frameTabla.setBackground(Color.WHITE);
+        frameTabla.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosed(e);
+                new App();
+            }
+        });
+
         this.NombresCol = new String[this.CantColumnas];
         JPanel panelE = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelE.setBackground(Color.WHITE);

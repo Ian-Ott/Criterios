@@ -8,6 +8,9 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 public class VentanaResultadoCriterio {
     private JFrame frameResultado;
@@ -75,6 +78,14 @@ public class VentanaResultadoCriterio {
         JPanel panelC1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelC1.setBackground(Color.WHITE);
 
+        //crea con el formato de punto para los decimales
+        DecimalFormat df = (DecimalFormat) DecimalFormat.getNumberInstance(Locale.US);
+        df.applyPattern("#0.0000");
+
+        df.setGroupingUsed(false);
+        df.setMaximumFractionDigits(4);
+        df.setMinimumFractionDigits(4);
+
         JPanel panel1 = new JPanel(new FlowLayout());
         panel1.setBackground(Color.WHITE);
         JTextArea textC1 = new JTextArea("Resultado para el criterio Wald ");
@@ -91,7 +102,7 @@ public class VentanaResultadoCriterio {
         textCO1.setDisabledTextColor(Color.BLACK);
         textCO1.setEditable(false);
         textCO1.setEnabled(false);
-        JTextArea textCOR1 = new JTextArea(String.format("%.4s",valorW));
+        JTextArea textCOR1 = new JTextArea(df.format(valorW));
         textCOR1.setBackground(new Color(255, 255, 255));
         textCOR1.setBorder(new LineBorder(Color.BLACK));
         textCOR1.setFont(new Font("Calibri", Font.BOLD, 16));
@@ -122,7 +133,7 @@ public class VentanaResultadoCriterio {
         textCO2.setDisabledTextColor(Color.BLACK);
         textCO2.setEditable(false);
         textCO2.setEnabled(false);
-        JTextArea textCOR2 = new JTextArea(String.format("%.4s",valorO));
+        JTextArea textCOR2 = new JTextArea(df.format(valorO));
         textCOR2.setBackground(new Color(255, 255, 255));
         textCOR2.setBorder(new LineBorder(Color.BLACK));
         textCOR2.setFont(new Font("Calibri", Font.BOLD, 16));
@@ -152,7 +163,7 @@ public class VentanaResultadoCriterio {
         textCO3.setDisabledTextColor(Color.BLACK);
         textCO3.setEditable(false);
         textCO3.setEnabled(false);
-        JTextArea textCOR3 = new JTextArea(String.format("%.4s",valorH));
+        JTextArea textCOR3 = new JTextArea(df.format(valorH));
         textCOR3.setBackground(new Color(255, 255, 255));
         textCOR3.setBorder(new LineBorder(Color.BLACK));
         textCOR3.setFont(new Font("Calibri", Font.BOLD, 16));
@@ -183,7 +194,7 @@ public class VentanaResultadoCriterio {
         textCO4.setDisabledTextColor(Color.BLACK);
         textCO4.setEditable(false);
         textCO4.setEnabled(false);
-        JTextArea textCOR4 = new JTextArea(String.format("%.4s",valorS));
+        JTextArea textCOR4 = new JTextArea(df.format(valorS));
         textCOR4.setBackground(new Color(255, 255, 255));
         textCOR4.setBorder(new LineBorder(Color.BLACK));
         textCOR4.setFont(new Font("Calibri", Font.BOLD, 16));
@@ -213,7 +224,7 @@ public class VentanaResultadoCriterio {
         textCO5.setDisabledTextColor(Color.BLACK);
         textCO5.setEditable(false);
         textCO5.setEnabled(false);
-        JTextArea textCOR5 = new JTextArea(String.format("%.4s",valorMBE));
+        JTextArea textCOR5 = new JTextArea(df.format(valorMBE));
         textCOR5.setBackground(new Color(255, 255, 255));
         textCOR5.setBorder(new LineBorder(Color.BLACK));
         textCOR5.setFont(new Font("Calibri", Font.BOLD, 16));
@@ -236,7 +247,7 @@ public class VentanaResultadoCriterio {
         textB6.setDisabledTextColor(Color.BLACK);
         textB6.setEditable(false);
         textB6.setEnabled(false);
-        JTextArea textBR6 = new JTextArea(String.format("%.4s",criterioMBE.getBEIP()));
+        JTextArea textBR6 = new JTextArea(df.format(criterioMBE.getBEIP()));
         textBR6.setBackground(new Color(255, 255, 255));
         textBR6.setBorder(new LineBorder(Color.BLACK));
         textBR6.setFont(new Font("Calibri", Font.BOLD, 16));
@@ -258,7 +269,7 @@ public class VentanaResultadoCriterio {
         textV7.setDisabledTextColor(Color.BLACK);
         textV7.setEditable(false);
         textV7.setEnabled(false);
-        JTextArea textVR7 = new JTextArea(String.format("%.4s",criterioMBE.getVEIP()));
+        JTextArea textVR7 = new JTextArea(df.format(criterioMBE.getVEIP()));
         textVR7.setBackground(new Color(255, 255, 255));
         textVR7.setBorder(new LineBorder(Color.BLACK));
         textVR7.setFont(new Font("Calibri", Font.BOLD, 16));

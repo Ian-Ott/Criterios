@@ -6,8 +6,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class VentanaNombreFilas {
     private int CantFilas;
@@ -26,11 +25,19 @@ public class VentanaNombreFilas {
         frameTabla.setTitle("Lista de Acciones");
         frameTabla.setLayout(new BorderLayout());
         frameTabla.setBackground(Color.WHITE);
+        frameTabla.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosed(e);
+                new App();
+            }
+        });
+
         this.NombresFila = new String[this.CantFilas];
         JPanel panelA = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelA.setBackground(Color.WHITE);
         JTextArea txtA = new JTextArea("ACCIONES");
-        txtA.setBackground(new Color(229, 225, 57));
+        txtA.setBackground(new Color(255, 251, 55));
         txtA.setDisabledTextColor(Color.BLACK);
         txtA.setFont(new Font("Calibri", Font.BOLD, 24));
         txtA.setBorder(new LineBorder(Color.BLACK));
@@ -75,7 +82,7 @@ public class VentanaNombreFilas {
         JPanel panelS = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelS.setBackground(Color.WHITE);
         JButton BotonContinuar = new JButton("Continuar");
-        BotonContinuar.setBackground(new Color(229, 225, 57));
+        BotonContinuar.setBackground(new Color(255, 251, 55));
         BotonContinuar.setFont(new Font("Calibri", Font.BOLD, 24));
         BotonContinuar.setBorder(new LineBorder(Color.BLACK));
         panelS.add(BotonContinuar);

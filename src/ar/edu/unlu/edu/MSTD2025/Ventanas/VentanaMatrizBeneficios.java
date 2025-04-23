@@ -39,7 +39,7 @@ public class VentanaMatrizBeneficios {
                 if (frameResultado != null) {
                     frameResultado.dispose();
                 }
-                //inciarApp();
+                new App();
             }
         });
         JPanel panelM = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -52,17 +52,18 @@ public class VentanaMatrizBeneficios {
         txtM.setEditable(false);
         txtM.setEnabled(false);
         panelM.add(txtM);
-        frameTabla.add(panelM, BorderLayout.NORTH);
         //se suma una fila para los encabezados
         JTable tabla = new JTable(new DefaultTableModel(listaTabla.getNombreColumnas() ,listaTabla.getFilaTamanio()));
-        tabla.setBackground(new Color(220,87,83));
+        tabla.setBackground(new Color(255, 255, 255));
         tabla.getTableHeader().setBackground(new Color(220, 87, 83));
         tabla.getTableHeader().setForeground(Color.BLACK);
         tabla.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 16));
         tabla.getTableHeader().setOpaque(false);
         tabla.getTableHeader().setReorderingAllowed(false);
-        tabla.getTableHeader().setResizingAllowed(false);
+        //tabla.getTableHeader().setResizingAllowed(false);
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         tabla.getTableHeader().setBorder(new LineBorder(Color.BLACK));
+        //tabla.setPreferredScrollableViewportSize(new Dimension(800, 400));
 
 
         JScrollPane scrollTabla = new JScrollPane(tabla);
@@ -90,14 +91,18 @@ public class VentanaMatrizBeneficios {
         encabezadoF.setFixedCellWidth(encabezadoSizeMax(listaTabla.getNombreFilas(),tamanioFuente) + 10);
         scrollTabla.setRowHeaderView(encabezadoF);
 
+        FontMetrics tamanioFC = tabla.getTableHeader().getFontMetrics(tabla.getTableHeader().getFont());
+        setEncabezadoSizeMax(tabla,listaTabla.getNombreColumnas(),tamanioFC);
+
         scrollTabla.setSize(1000,500);
         JScrollBar scrollLateral = new JScrollBar(JScrollBar.HORIZONTAL);
         scrollTabla.setHorizontalScrollBar(scrollLateral);
         scrollTabla.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollTabla.getHorizontalScrollBar().setBackground(Color.WHITE);
+
         //tabla.setSize(1100,500);
         tabla.setPreferredScrollableViewportSize(new Dimension(300, 200));
-        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        //tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         frameTabla.add(scrollTabla, BorderLayout.CENTER);
         tabla.setVisible(true);
         tabla.setEnabled(true);
@@ -107,6 +112,7 @@ public class VentanaMatrizBeneficios {
         textP.setDisabledTextColor(Color.BLACK);
         textP.setEditable(false);
         textP.setEnabled(false);
+
         JPanel panelOpt = new JPanel(new FlowLayout());
         panelOpt.setBackground(Color.WHITE);
         panelOpt.add(textP);
@@ -116,7 +122,11 @@ public class VentanaMatrizBeneficios {
         textOptimismo.setBackground(Color.WHITE);
         textOptimismo.setBorder(new LineBorder(Color.BLACK));
         panelOpt.add(textOptimismo);
-        frameTabla.add(panelOpt, BorderLayout.NORTH);
+        JPanel panelN = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelN.setBackground(Color.WHITE);
+        panelN.add(panelM);
+        panelN.add(panelOpt);
+        frameTabla.add(panelN, BorderLayout.NORTH);
 
         JPanel panelS = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelS.setBackground(Color.WHITE);
@@ -195,6 +205,14 @@ public class VentanaMatrizBeneficios {
             }
         }
         return maxLenght;
+    }
+    private void setEncabezadoSizeMax(JTable tabla, String[] nombreCol, FontMetrics tamanioFuente) {
+        int maxLenght = 0;
+        int actual;
+        for (int i = 0; i < nombreCol.length; i++) {
+            actual = tamanioFuente.stringWidth(nombreCol[i]);
+            tabla.getColumnModel().getColumn(i).setPreferredWidth(actual + 20);
+        }
     }
     private void mostrarError(String textError) {
         JOptionPane.showMessageDialog(null,textError,"ERROR",JOptionPane.ERROR_MESSAGE);//agregar icono?

@@ -8,6 +8,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class VentanaProbColumn {
@@ -23,6 +25,14 @@ public class VentanaProbColumn {
         JFrame frameTabla = new JFrame();
         frameTabla.setTitle("Probabilidades");
         frameTabla.setLayout(new BorderLayout());
+        frameTabla.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosed(e);
+                new App();
+            }
+        });
+
         JPanel panelP = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelP.setBackground(Color.WHITE);
         JTextArea txtP = new JTextArea("INGRESE LA PROBABILIDAD DE CADA ESTADO");
@@ -44,6 +54,7 @@ public class VentanaProbColumn {
         scrollTabla.setBackground(Color.WHITE);
         scrollTabla.setBorder(new LineBorder(Color.BLACK));
         scrollTabla.getHorizontalScrollBar().setBackground(Color.WHITE);
+        scrollTabla.getVerticalScrollBar().setBackground(Color.WHITE);
 
         scrollTabla.getViewport().setFont(new Font("Calibri", Font.BOLD, 12));
         scrollTabla.getViewport().setBackground(Color.WHITE);
@@ -57,11 +68,16 @@ public class VentanaProbColumn {
         tabla.setPreferredScrollableViewportSize(new Dimension(800, 50));
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
+
         tabla.getTableHeader().setReorderingAllowed(false);
         tabla.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 16));
         tabla.getTableHeader().setForeground(Color.BLACK);
         tabla.getTableHeader().setBackground(Color.WHITE);
         tabla.getTableHeader().setBorder(new LineBorder(Color.BLACK));
+
+        FontMetrics tamanioFuente = tabla.getTableHeader().getFontMetrics(tabla.getTableHeader().getFont());
+        setEncabezadoSizeMax(tabla,listaTabla.getNombreColumnas(),tamanioFuente);
+
 
         frameTabla.setSize(1100,500);
         tabla.setSize(1100,500);
@@ -120,16 +136,14 @@ public class VentanaProbColumn {
             }
         });
     }
-    private int encabezadoSizeMax(String[] nombreFila, FontMetrics tamanioFuente) {
+
+    private void setEncabezadoSizeMax(JTable tabla, String[] nombreCol, FontMetrics tamanioFuente) {
         int maxLenght = 0;
         int actual;
-        for (int i = 0; i < nombreFila.length; i++) {
-            actual = tamanioFuente.stringWidth(nombreFila[i]);
-            if (nombreFila[i].length() > maxLenght){
-                maxLenght = actual;
-            }
+        for (int i = 0; i < nombreCol.length; i++) {
+            actual = tamanioFuente.stringWidth(nombreCol[i]);
+            tabla.getColumnModel().getColumn(i).setPreferredWidth(actual + 20);
         }
-        return maxLenght;
     }
 
     private void mostrarError(String textError) {
