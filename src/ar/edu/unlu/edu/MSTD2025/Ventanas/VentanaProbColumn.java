@@ -114,7 +114,7 @@ public class VentanaProbColumn {
                         if (actual != null) {
                             try {
                                 listaTemp.add(Double.valueOf(actual));
-                                sumaP = sumaP + listaTemp.get(i);
+                                sumaP = sumaP + (listaTemp.get(i) * 10);
                             } catch (NumberFormatException ex) {
                                 error = true;
                                 mostrarError("El valor ingresado no es valido.");
@@ -125,8 +125,9 @@ public class VentanaProbColumn {
                         }
                     }
                 }
+                sumaP = listaTabla.getColumnaTamanio() / sumaP; //multiplico y divido el valor original para redondearlo sino da erroneo el resultado
                 if (!error) {
-                    if (sumaP != 1) {
+                    if (sumaP != 1.0) {
                         mostrarError("La suma de las probabilidades no son iguales a 1.");
                     } else {
                         listaTabla.setListaProb(listaTemp);

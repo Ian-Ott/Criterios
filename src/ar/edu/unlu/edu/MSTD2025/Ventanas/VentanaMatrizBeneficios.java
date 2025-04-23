@@ -57,18 +57,25 @@ public class VentanaMatrizBeneficios {
 
         //se suma una fila para los encabezados
         JTable tabla = new JTable(new DefaultTableModel(listaTabla.getNombreColumnas() ,listaTabla.getFilaTamanio()));
+        tabla.setBackground(Color.WHITE);
+        tabla.setVisible(true);
+        tabla.setEnabled(true);
+        //tabla.getTableHeader().setResizingAllowed(false);
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabla.setBackground(new Color(255, 255, 255));
+        tabla.setFont(new Font("Calibri", Font.BOLD, 16));
+        tabla.setRowHeight(tabla.getFontMetrics(tabla.getFont()).getHeight()+2);
+
+        tabla.getTableHeader().setBorder(new LineBorder(Color.BLACK));
         tabla.getTableHeader().setBackground(new Color(220, 87, 83));
         tabla.getTableHeader().setForeground(Color.BLACK);
         tabla.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 16));
         tabla.getTableHeader().setOpaque(false);
         tabla.getTableHeader().setReorderingAllowed(false);
         tabla.setPreferredScrollableViewportSize(new Dimension(300, 200));
-        tabla.setVisible(true);
-        tabla.setEnabled(true);
-        //tabla.getTableHeader().setResizingAllowed(false);
-        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tabla.getTableHeader().setBorder(new LineBorder(Color.BLACK));
+
+
+
 
         JScrollPane scrollTabla = new JScrollPane(tabla);
         scrollTabla.setBackground(Color.WHITE);
@@ -92,7 +99,7 @@ public class VentanaMatrizBeneficios {
 
         FontMetrics tamanioFuente = encabezadoF.getFontMetrics(encabezadoF.getFont());
         //se establece el ancho de el encabezado de fila segun el ancho del string mas largo
-        encabezadoF.setFixedCellWidth(encabezadoSizeMax(listaTabla.getNombreFilas(),tamanioFuente) + 10);
+        encabezadoF.setFixedCellWidth(encabezadoSizeMax(listaTabla.getNombreFilas(),tamanioFuente) + 30);
         scrollTabla.setRowHeaderView(encabezadoF);
 
         //el tamaño del encabezado de la columna se define segun el tamaño del string de cada nombre
